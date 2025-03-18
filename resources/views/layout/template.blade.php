@@ -30,6 +30,8 @@
 
 
     @yield('scripts')
+
+    @include('components.toast')
 </body>
 
 </html>
