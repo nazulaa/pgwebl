@@ -141,6 +141,10 @@
 
         <script src="https://unpkg.com/@terraformer/wkt"></script>
 
+        <script src="https://leafletjs.com/reference.html#control-layers"></script>
+
+
+
         <script>
             var map = L.map('map').setView([55.66143663816052, 12.468573391153898], 12);
 
@@ -215,6 +219,109 @@
 
                 drawnItems.addLayer(layer);
             });
+
+            // GeoJSON Points
+var points = L.geoJson(null, {
+    pointToLayer: function (feature, latlng) {
+        var customIcon = L.divIcon({
+            className: 'custom-marker',
+            html: '<div style="background-color: #E27396; width: 20px; height: 20px; border-radius: 50%; border: 2px solid #1E1B18 ;"></div>',
+            iconSize: [20, 20],
+            iconAnchor: [10, 20]
+        });
+        return L.marker(latlng, { icon: customIcon });
+    },
+    onEachFeature: function (feature, layer) {
+        var popupContent = "Nama: " + feature.properties.name + "<br>" +
+            "Deskripsi: " + feature.properties.description + "<br>" +
+            "Dibuat: " + feature.properties.created_at;
+        layer.on({
+            click: function (e) {
+                layer.bindPopup(popupContent).openPopup();
+            },
+            mouseover: function (e) {
+                layer.bindTooltip(feature.properties.name).openTooltip();
+            },
+        });
+    },
+});
+$.getJSON("{{ route('api.points') }}", function (data) {
+    points.addData(data);
+    map.addLayer(points);
+});
+
+
+            // GeoJSON POLYLINE
+var polyline = L.geoJson(null, {
+    style: function (feature) {
+        return {
+            color: '#FFD166',
+            weight: 3
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        var popupContent = "Nama: " + feature.properties.name + "<br>" +
+            "Deskripsi: " + feature.properties.description + "<br>" +
+            "Panjang(Km) : " + feature.properties.length_km + "<br>" +
+            "Dibuat: " + feature.properties.created_at;
+        layer.on({
+            click: function (e) {
+                layer.bindPopup(popupContent).openPopup();
+            },
+            mouseover: function (e) {
+                layer.bindTooltip(feature.properties.name).openTooltip();
+            },
+        });
+    },
+});
+$.getJSON("{{ route('api.polyline') }}", function (data) {
+    polyline.addData(data);
+    map.addLayer(polyline);
+});
+
+
+            // GeoJSON POLYGON
+var polygon = L.geoJson(null, {
+    style: function (feature) {
+        return {
+            color: '#F72585',
+            fillColor: '#CDB4DB',
+            fillOpacity: 0.8,
+            weight: 2
+        };
+    },
+    onEachFeature: function (feature, layer) {
+        var popupContent = "Nama: " + feature.properties.name + "<br>" +
+            "Deskripsi: " + feature.properties.description + "<br>" +
+            "Luas(Km2) : " + feature.properties.area_km2 + "<br>" +
+            "Dibuat: " + feature.properties.created_at;
+        layer.on({
+            click: function (e) {
+                layer.bindPopup(popupContent).openPopup();
+            },
+            mouseover: function (e) {
+                layer.bindTooltip(feature.properties.name).openTooltip();
+            },
+        });
+    },
+});
+$.getJSON("{{ route('api.polygon') }}", function (data) {
+    polygon.addData(data);
+    map.addLayer(polygon);
+});
+
+
+
+            // Control Layer
+var overlayMaps = {
+	"points": points,
+	"polyline": polyline,
+	"polygon": polygon,
+};
+
+var controllayer = L.control.layers(overlayMaps);
+controllayer.addTo(map);
+
         </script>
     @endsection
 
