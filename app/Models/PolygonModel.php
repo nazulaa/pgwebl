@@ -13,7 +13,7 @@ class PolygonModel extends Model
 
     public function geojson_polygon()
     {
-        $polygon = $this->select(DB::raw('st_asgeojson(geom) as geom, name, description,
+        $polygon = $this->select(DB::raw('st_asgeojson(geom) as geom, name, description, image,
         st_area(geom, true) as area_m2, st_area(geom, true)/1000000 as area_km2, created_at, updated_at'))
         ->get();
 
@@ -33,6 +33,7 @@ class PolygonModel extends Model
                     'area_km2' => $p->area_km2,
                     'created_at' => $p->created_at,
                     'updated_at' => $p->updated_at,
+                    'image' => $p->image,
                 ],
             ];
             array_push($geojson['features'], $feature);
