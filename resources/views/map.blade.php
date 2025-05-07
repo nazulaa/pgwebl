@@ -252,10 +252,24 @@
                     });
                 },
                 onEachFeature: function(feature, layer) {
-                    var popupContent = "Nama: " + feature.properties.name + "<br>" +
-                        "Deskripsi: " + feature.properties.description + "<br>" +
-                        "Dibuat: " + feature.properties.created_at + "<br>" +
-                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>";
+
+                    var routeDelete = "{{ route('point.destroy', ':id') }}";
+                        routeDelete = routeDelete.replace(':id', feature.properties.id);
+
+                        var popupContent = "Nama: " + feature.properties.name + "<br>" +
+						"Deskripsi: " + feature.properties.description + "<br>" +
+                        "Dibuat pada: " + feature.properties.created_at + "<br>" +
+                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>" + "<br>" +
+                        "<form method='POST' action='" + routeDelete + "'>" +
+                            '@csrf' + '@method("DELETE")' +
+                            "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" + "</form>"
+
+                    //var popupContent = `Nama: ${feature.properties.name} <br>
+                    //Deskripsi: ${feature.properties.description} <br>
+                    //Dibuat : ${feature.properties.created_at} <br>
+                    //<img src='{{ asset('storage/images')}}/ ${feature.properties.image} width='250'
+                    //`;
+
                     layer.on({
                         click: function(e) {
                             layer.bindPopup(popupContent).openPopup();
@@ -281,11 +295,17 @@
                     };
                 },
                 onEachFeature: function(feature, layer) {
+
+                    var routeDelete = "{{ route('polylines.destroy', ':id') }}";
+                        routeDelete = routeDelete.replace(':id', feature.properties.id);
                     var popupContent = "Nama: " + feature.properties.name + "<br>" +
                         "Deskripsi: " + feature.properties.description + "<br>" +
                         "Panjang(Km) : " + feature.properties.length_km + "<br>" +
                         "Dibuat: " + feature.properties.created_at + "<br>" +
-                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>";
+                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>" + "<br>" +
+                        "<form method='POST' action='" + routeDelete + "'>" +
+                            '@csrf' + '@method("DELETE")' +
+                            "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" + "</form>";
                     layer.on({
                         click: function(e) {
                             layer.bindPopup(popupContent).openPopup();
@@ -313,11 +333,16 @@
                     };
                 },
                 onEachFeature: function(feature, layer) {
+                    var routeDelete = "{{ route('polygons.destroy', ':id') }}";
+                        routeDelete = routeDelete.replace(':id', feature.properties.id);
                     var popupContent = "Nama: " + feature.properties.name + "<br>" +
                         "Deskripsi: " + feature.properties.description + "<br>" +
                         "Luas(Km2) : " + feature.properties.area_km2 + "<br>" +
                         "Dibuat: " + feature.properties.created_at + "<br>" +
-                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>";
+                        "<img src='{{ asset('storage/images') }}/" + feature.properties.image + "' width='200' alt=''>" + "<br>" +
+                        "<form method='POST' action='" + routeDelete + "'>" +
+                            '@csrf' + '@method("DELETE")' +
+                            "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" + "</form>";
                     layer.on({
                         click: function(e) {
                             layer.bindPopup(popupContent).openPopup();

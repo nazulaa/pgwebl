@@ -57,16 +57,16 @@ class PointsController extends Controller
         //create image directory if not exist
         if (!is_dir('storage/images')) {
             mkdir('./storage/images', 0777);
-         }
+        }
 
-         //Get Image File
-         if ($request->hasFile('image')) {
+        //Get Image File
+        if ($request->hasFile('image')) {
             $image = $request->file('image');
             $name_image = time() . "_point." . strtolower($image->getClientOriginalExtension());
             $image->move('storage/images', $name_image);
-          } else {
+        } else {
             $name_image = null;
-          }
+        }
 
         $data = [
             'geom' => $request->geom_point,
@@ -113,6 +113,20 @@ class PointsController extends Controller
      */
     public function destroy(string $id)
     {
-        //
+
+        $imagefile = $this->points->find($id)->image;
+
+        if (!$this->points->destroy($id)) {
+        return redirect ()->route('map')->with('error', 'Point failed to delete');
+        }
+
+        //delete image file
+        if($imagefile !=null){
+            if(file_exists('./storage/images/' . $imagefile)){
+                unlink('./storage/images/' .$imagefile);
+            }
+        }
+
+        return redirect ()->route('map')->with('success', 'Point has been deleted');
     }
 }
