@@ -159,7 +159,7 @@ class PolygonController extends Controller
 
         //Redirect data
         return redirect()->route('map')->with('success', 'polygon has been updated');
-    }
+    } 
 
     /**
      * Remove the specified resource from storage.
