@@ -2,41 +2,95 @@
 
 
 @section('content')
+<div class="card container mt-4 ">
+    <table class="table  table-striped">
+        <thead class="bg-danger text-white">
+        <tr>
+            <th>No</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Updated At</th>
+        </tr>
+    </thead>
+    <tbody>
+
+        @foreach ($points as $p)
+        <tr>
+            <td>{{$p->id}}</td>
+            <td>{{$p->name}}</td>
+            <td>{{$p->description}}</td>
+            <td>
+                <img src="{{ asset('storage/images/' .$p->image) }}" alt=""
+                width="200" title="{{ $p->image }}">
+            </td>
+            <td>{{$p->created_at}}</td>
+            <td>{{$p->updated_at}}</td>
+        </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
+
 <div class="card container mt-4">
     <table class="table table-striped">
         <thead class="bg-primary text-white">
         <tr>
             <th>No</th>
-            <th>Nama</th>
-            <th>NIM</th>
-            <th>Kelas</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Updated At</th>
         </tr>
     </thead>
     <tbody>
+
+        @foreach ($polyline as $p)
         <tr>
-            <td>1</td>
-            <td>Rifzu</td>
-            <td>523111</td>
-            <td>A</td>
+            <td>{{$p->id}}</td>
+            <td>{{$p->name}}</td>
+            <td>{{$p->description}}</td>
+            <td>
+                <img src="{{ asset('storage/images/' .$p->image) }}" alt=""
+                width="200" title="{{ $p->image }}">
+            </td>
+            <td>{{$p->created_at}}</td>
+            <td>{{$p->updated_at}}</td>
         </tr>
+        @endforeach
+    </tbody>
+</table>
+</div>
+
+<div class="card container mt-4">
+    <table class="table table-danger table-striped">
+        <thead class="bg-primary text-white">
         <tr>
-            <td>2</td>
-            <td>Najla</td>
-            <td>23854</td>
-            <td>A</td>
+            <th>No</th>
+            <th>Name</th>
+            <th>Description</th>
+            <th>Image</th>
+            <th>Created At</th>
+            <th>Updated At</th>
         </tr>
+    </thead>
+    <tbody>
+
+        @foreach ($polygon as $p)
         <tr>
-            <td>3</td>
-            <td>Aza</td>
-            <td>12345</td>
-            <td>B</td>
+            <td>{{$p->id}}</td>
+            <td>{{$p->name}}</td>
+            <td>{{$p->description}}</td>
+            <td>
+                <img src="{{ asset('storage/images/' .$p->image) }}" alt=""
+                width="200" title="{{ $p->image }}">
+            </td>
+            <td>{{$p->created_at}}</td>
+            <td>{{$p->updated_at}}</td>
         </tr>
-        <tr>
-            <td>4</td>
-            <td>Kazuri</td>
-            <td>23333</td>
-            <td>B</td>
-        </tr>
+        @endforeach
     </tbody>
 </table>
 </div>
