@@ -276,8 +276,8 @@
                         "<form method='POST' action='" + routeDelete + "'>" +
                         '@csrf' + '@method('DELETE')' +
                         "<button type='submit' class='btn btn-danger btn-sm text-start' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" +
-                        "</form>"
-                    "</div>" +
+                        "</form>" +
+                    "</div>" + "<br>" + "<p>Created by: " + feature.properties.user_created + "</p>";
                     "</div>";
 
                     //var popupContent = `Nama: ${feature.properties.name} <br>
@@ -334,7 +334,8 @@
                         "<form method='POST' action='" + routeDelete + "'>" +
                         '@csrf' + '@method('DELETE')' +
                         "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" +
-                        "</form>";
+                        "</form>" +
+                    "</div>" + "<br>" + "<p>Created by: " + feature.properties.user_created + "</p>";;
                     layer.on({
                         click: function(e) {
                             layer.bindPopup(popupContent).openPopup();
@@ -384,7 +385,8 @@
                         "<form method='POST' action='" + routeDelete + "'>" +
                         '@csrf' + '@method('DELETE')' +
                         "<button type='submit' class='btn btn-danger btn-sm' onclick='return confirm(`Are you sure?`)'><i class='fa-solid fa-trash-can'></i> Hapus</button>" +
-                        "</form>";
+                        "</form>" +
+                    "</div>" + "<br>" + "<p>Created by: " + feature.properties.user_created + "</p>";;
                     layer.on({
                         click: function(e) {
                             layer.bindPopup(popupContent).openPopup();

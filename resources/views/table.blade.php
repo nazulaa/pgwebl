@@ -15,7 +15,6 @@
         </tr>
     </thead>
     <tbody>
-
         @foreach ($points as $p)
         <tr>
             <td>{{$p->id}}</td>

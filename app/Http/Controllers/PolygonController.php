@@ -67,6 +67,7 @@ class PolygonController extends Controller
             'name' => $request->name,
             'description' => $request->description,
             'image' => $name_image,
+            'user_id' => auth()->user()->id,
         ];
 
         // Create data
@@ -159,7 +160,7 @@ class PolygonController extends Controller
 
         //Redirect data
         return redirect()->route('map')->with('success', 'polygon has been updated');
-    } 
+    }
 
     /**
      * Remove the specified resource from storage.
